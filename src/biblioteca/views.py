@@ -33,16 +33,17 @@ def eliminar_usuario(request, usuario_id):
     return redirect("listar_usuarios")
 
 def crear_libro(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = LibroForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'El libro se ha creado exitosamente.')
+            messages.success(request, "Libro creado con éxito.")
             return redirect('crear_libro')
     else:
         form = LibroForm()
-
+    
     return render(request, 'biblioteca/crear_libro.html', {'form': form})
+
 
 def listar_libros(request):
     libros = Libro.objects.all()  
@@ -52,12 +53,22 @@ def crear_prestamo(request):
     if request.method == "POST":
         form = PrestamoForm(request.POST)
         if form.is_valid():
-            form.save()  
-            return redirect('listar_prestamos')  
+            libro = form.cleaned_data['libro']
+            
+            if not libro.disponible:
+                messages.error(request, f"El libro '{libro.titulo}' no está disponible para préstamo.")
+                return render(request, 'biblioteca/crear_prestamo.html', {'form': form})
+            
+            form.save()
+            libro.disponible = False
+            libro.save()
+            messages.success(request, f"El libro '{libro.titulo}' ha sido prestado a {form.cleaned_data['usuario'].nombre}.")
+            return redirect('listar_prestamos')
     else:
         form = PrestamoForm()
 
     return render(request, 'biblioteca/crear_prestamo.html', {'form': form})
+
 
 def listar_prestamos(request):
     prestamos = Prestamo.objects.all()
@@ -70,6 +81,8 @@ def registrar_devolucion(request, prestamo_id):
         messages.warning(request, "Este libro ya fue devuelto.")
     else:
         prestamo.fecha_devolucion = now().date()
+        prestamo.libro.disponible = True
+        prestamo.libro.save()
         prestamo.save()
         messages.success(request, f"Devolución registrada para el libro '{prestamo.libro.titulo}'.")
     
