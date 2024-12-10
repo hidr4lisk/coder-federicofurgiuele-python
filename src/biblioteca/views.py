@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from .models import Usuario
 
 def index(request):
@@ -15,6 +16,16 @@ def crear_usuario(request):
         
         # Crear el usuario
         Usuario.objects.create(nombre=nombre, email=email, telefono=telefono)
-        return redirect('index')  
+        return redirect('crear_usuario')  
     
     return render(request, "biblioteca/crear_usuario.html")
+
+def listar_usuarios(request):
+    usuarios = Usuario.objects.all()
+    return render(request, "biblioteca/listar_usuarios.html", {"usuarios": usuarios})
+
+def eliminar_usuario(request, usuario_id):
+    usuario = get_object_or_404(Usuario, id=usuario_id)
+    usuario.delete()
+    messages.success(request, f"El usuario {usuario.nombre} ha sido eliminado correctamente.")
+    return redirect("listar_usuarios")
