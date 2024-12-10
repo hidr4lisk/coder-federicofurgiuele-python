@@ -18,7 +18,7 @@ El sistema cuenta con las siguientes funcionalidades:
 - **Crear Libro**: Permite agregar nuevos libros a la biblioteca.
 - **Listar Libros**: Muestra todos los libros disponibles en la biblioteca.
 - **Crear Préstamo**: Facilita la creación de préstamos de libros.
-- **Listar Préstamos**: Visualiza los préstamos realizados.
+- **Listar Préstamos**: Visualiza los préstamos realizados y te da la posibilidad de devolver libros.
 
 ## Configuración del Proyecto
 
