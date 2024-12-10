@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Usuario
+from .models import Usuario, Libro
+from .forms import LibroForm
 
 def index(request):
     return render(request, "biblioteca/index.html")
@@ -29,3 +30,15 @@ def eliminar_usuario(request, usuario_id):
     usuario.delete()
     messages.success(request, f"El usuario {usuario.nombre} ha sido eliminado correctamente.")
     return redirect("listar_usuarios")
+
+def crear_libro(request):
+    if request.method == 'POST':
+        form = LibroForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'El libro se ha creado exitosamente.')
+            return redirect('crear_libro')
+    else:
+        form = LibroForm()
+
+    return render(request, 'biblioteca/crear_libro.html', {'form': form})
