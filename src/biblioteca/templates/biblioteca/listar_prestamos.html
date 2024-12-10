@@ -1,0 +1,34 @@
+{% extends 'biblioteca/base.html' %}
+
+{% block contenido %}
+<h2>Listado de Préstamos</h2>
+
+<table>
+    <thead>
+      <tr>
+        <th>Libro</th>
+        <th>Usuario</th>
+        <th>Fecha Préstamo</th>
+        <th>Fecha Devolución</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for prestamo in prestamos %}
+        <tr>
+          <td>{{ prestamo.libro.titulo }}</td>
+          <td>{{ prestamo.usuario.nombre }}</td>
+          <td>{{ prestamo.fecha_prestamo }}</td>
+          <td>{{ prestamo.fecha_devolucion|default:"Pendiente" }}</td>
+          <td>
+            {% if not prestamo.fecha_devolucion %}
+              <a href="{% url 'registrar_devolucion' prestamo.id %}" class="btn btn-success">Registrar Devolución</a>
+            {% else %}
+              <span>Devuelto</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

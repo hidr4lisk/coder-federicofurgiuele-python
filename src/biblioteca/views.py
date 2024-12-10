@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.timezone import now
 from django.contrib import messages
-from .models import Usuario, Libro
-from .forms import LibroForm
+from .models import Usuario, Libro, Prestamo
+from .forms import LibroForm, PrestamoForm
 
 def index(request):
     return render(request, "biblioteca/index.html")
@@ -42,3 +43,34 @@ def crear_libro(request):
         form = LibroForm()
 
     return render(request, 'biblioteca/crear_libro.html', {'form': form})
+
+def listar_libros(request):
+    libros = Libro.objects.all()  
+    return render(request, 'biblioteca/listar_libros.html', {'libros': libros})
+
+def crear_prestamo(request):
+    if request.method == "POST":
+        form = PrestamoForm(request.POST)
+        if form.is_valid():
+            form.save()  
+            return redirect('listar_prestamos')  
+    else:
+        form = PrestamoForm()
+
+    return render(request, 'biblioteca/crear_prestamo.html', {'form': form})
+
+def listar_prestamos(request):
+    prestamos = Prestamo.objects.all()
+    return render(request, "biblioteca/listar_prestamos.html", {"prestamos": prestamos})
+
+def registrar_devolucion(request, prestamo_id):
+    prestamo = get_object_or_404(Prestamo, id=prestamo_id)
+    
+    if prestamo.fecha_devolucion:
+        messages.warning(request, "Este libro ya fue devuelto.")
+    else:
+        prestamo.fecha_devolucion = now().date()
+        prestamo.save()
+        messages.success(request, f"Devolución registrada para el libro '{prestamo.libro.titulo}'.")
+    
+    return redirect("listar_prestamos")

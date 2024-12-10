@@ -1,0 +1,10 @@
+{% extends "biblioteca/base.html" %}
+
+{% block contenido %}
+  <h2>Crear Préstamo</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Muestra el formulario con los campos -->
+    <button type="submit">Crear Préstamo</button>
+  </form>
+{% endblock %}
