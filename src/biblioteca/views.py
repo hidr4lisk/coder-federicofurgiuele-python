@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.timezone import now
 from django.contrib import messages
 from .models import Usuario, Libro, Prestamo
-from .forms import LibroForm, PrestamoForm
+from .forms import LibroForm, PrestamoForm, UsuarioForm
 
 def index(request):
     return render(request, "biblioteca/index.html")
@@ -31,6 +31,20 @@ def eliminar_usuario(request, usuario_id):
     usuario.delete()
     messages.success(request, f"El usuario {usuario.nombre} ha sido eliminado correctamente.")
     return redirect("listar_usuarios")
+
+def modificar_usuario(request, usuario_id):
+    usuario = get_object_or_404(Usuario, id=usuario_id)
+    
+    if request.method == "POST":
+        form = UsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"El usuario {usuario.nombre} ha sido actualizado correctamente.")
+            return redirect("listar_usuarios")
+    else:
+        form = UsuarioForm(instance=usuario)
+    
+    return render(request, "biblioteca/modificar_usuario.html", {"form": form, "usuario": usuario})
 
 def crear_libro(request):
     if request.method == "POST":

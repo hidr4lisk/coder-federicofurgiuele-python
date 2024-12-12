@@ -1,5 +1,5 @@
 from django import forms
-from .models import Libro, Prestamo
+from .models import Libro, Prestamo, Usuario
 
 class LibroForm(forms.ModelForm):
     class Meta:
@@ -19,3 +19,7 @@ class PrestamoForm(forms.ModelForm):
             'fecha_devolucion': forms.DateInput(attrs={'type': 'date'})
         }
 
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['nombre', 'email', 'telefono']

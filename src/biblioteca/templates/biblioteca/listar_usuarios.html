@@ -5,27 +5,26 @@
 <table>
     <thead>
         <tr>
-            <th>#</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         {% for usuario in usuarios %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ usuario.nombre }}</td>
-            <td>{{ usuario.email }}</td>
-            <td>{{ usuario.telefono }}</td>
-            <td>
-                <a href="{% url 'eliminar_usuario' usuario.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Eliminar</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td>No hay usuarios registrados.</td>
-        </tr>
+            <tr>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.telefono }}</td>
+                <td>
+                    <a href="{% url 'modificar_usuario' usuario.id %}" class="btn btn-warning">Modificar</a>
+                    <form action="{% url 'eliminar_usuario' usuario.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
         {% endfor %}
     </tbody>
 </table>
