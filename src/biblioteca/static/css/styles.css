@@ -1,6 +1,5 @@
 .contenido {
     display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
     margin: 0 auto; /* Opcional: asegura márgenes automáticos */
     text-align: center; /* Opcional: centra el texto dentro de los elementos */
     width: 100%; /* Asegura que ocupe todo el ancho disponible */
