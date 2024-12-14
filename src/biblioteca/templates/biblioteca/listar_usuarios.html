@@ -1,31 +1,33 @@
 {% extends "biblioteca/base.html" %}
 
 {% block contenido %}
-<h2>Listado de Usuarios</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for usuario in usuarios %}
+<fieldset>
+    <legend><h2>Listado de Usuarios</h2></legend>
+    <table>
+        <thead>
             <tr>
-                <td>{{ usuario.nombre }}</td>
-                <td>{{ usuario.email }}</td>
-                <td>{{ usuario.telefono }}</td>
-                <td>
-                    <a href="{% url 'modificar_usuario' usuario.id %}" class="btn btn-warning">Modificar</a>
-                    <form action="{% url 'eliminar_usuario' usuario.id %}" method="POST" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                </td>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.telefono }}</td>
+                    <td>
+                        <a href="{% url 'modificar_usuario' usuario.id %}" class="btn btn-warning">Modificar</a>
+                        <form action="{% url 'eliminar_usuario' usuario.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</fieldset>
 {% endblock %}

@@ -1,7 +1,8 @@
 {% extends "biblioteca/base.html" %}
 
 {% block contenido %}
-  <h2>Listado de Libros</h2>
+<fieldset>
+  <legend><h2>Listado de Libros</h2></legend>
   <table>
     <thead>
       <tr>
@@ -26,4 +27,5 @@
       {% endfor %}
     </tbody>
   </table>
+</fieldset>
 {% endblock %}
