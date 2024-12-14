@@ -1,23 +1,26 @@
 {% extends "biblioteca/base.html" %}
 
 {% block contenido %}
-<h2>Crear Usuario</h2>
 <form method="POST">
     {% csrf_token %}
-    <table>
-        <tr>
-            <td><label for="nombre" class="form-label">Nombre:</label></td>
-            <td><input type="text" name="nombre" id="nombre" class="form-control" required></td>
-        </tr>
-        <tr>
-            <td><label for="email" class="form-label">Correo Electrónico:</label></td>
-            <td><input type="email" name="email" id="email" class="form-control" required></td>
-        </tr>
-        <tr>
-            <td><label for="telefono" class="form-label">Teléfono:</label></td>
-            <td><input type="text" name="telefono" id="telefono" class="form-control"></td>
-        </tr>
-    </table>
-    <button type="submit">Guardar</button>
+    <fieldset>
+        <legend><h2>Crear Usuario</h2></legend>
+        <table>
+            <tr>
+                <td><label for="nombre" class="form-label">Nombre:</label></td>
+                <td><input type="text" name="nombre" id="nombre" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td><label for="email" class="form-label">Correo Electrónico:</label></td>
+                <td><input type="email" name="email" id="email" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td><label for="telefono" class="form-label">Teléfono:</label></td>
+                <td><input type="text" name="telefono" id="telefono" class="form-control"></td>
+            </tr>
+        </table>
+        <button type="submit">Guardar</button>
+    </fieldset>
+    
 </form>
 {% endblock %}
