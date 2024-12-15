@@ -98,3 +98,17 @@ body {
 fieldset{
     border: 0px;
 }
+table {
+    width: 100%;
+    border-collapse: collapse; /* Une los bordes */
+}
+
+th, td {
+    border: 1px solid black; /* Agrega un borde a las celdas */
+    padding: 8px; /* Añade espacio dentro de las celdas */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+th {
+    background-color: #f2f2f2; /* Fondo para encabezados */
+}
