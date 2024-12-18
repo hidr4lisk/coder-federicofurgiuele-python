@@ -18,7 +18,7 @@ def crear_usuario(request):
         
         # Crear el usuario
         Usuario.objects.create(nombre=nombre, email=email, telefono=telefono)
-        return redirect('crear_usuario')  
+        return redirect('listar_usuarios')  
     
     return render(request, "biblioteca/crear_usuario.html")
 
@@ -38,7 +38,7 @@ def crear_libro(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Libro creado con éxito.")
-            return redirect('crear_libro')
+            return redirect('listar_libros')
     else:
         form = LibroForm()
     
