@@ -58,6 +58,36 @@ def crear_libro(request):
     
     return render(request, 'biblioteca/crear_libro.html', {'form': form})
 
+def modificar_libro(request, libro_id):
+    libro = get_object_or_404(Libro, id=libro_id)
+    
+    # Verificar si el libro está disponible
+    if not libro.disponible:
+        messages.error(request, f"El libro '{libro.titulo}' no se puede modificar porque está prestado.")
+        return redirect("listar_libros")
+    
+    if request.method == "POST":
+        # Crear form con los datos POST pero excluir el campo 'disponible'
+        form = LibroForm(request.POST, instance=libro)
+        
+        # Establecer el campo disponible al valor actual antes de validar
+        form.data = form.data.copy()
+        form.data['disponible'] = libro.disponible
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"El libro '{libro.titulo}' ha sido actualizado correctamente.")
+            return redirect("listar_libros")
+    else:
+        form = LibroForm(instance=libro)
+    
+    # Deshabilitar el campo 'disponible' en el formulario
+    form.fields['disponible'].disabled = True
+    
+    return render(request, "biblioteca/modificar_libro.html", {
+        "form": form,
+        "libro": libro
+    })
 
 def listar_libros(request):
     libros = Libro.objects.all()  
