@@ -35,7 +35,7 @@
                 <td>
                     {% if not prestamo.fecha_devolucion %}
                         En préstamo
-                        <a href="{% url 'registrar_devolucion' prestamo.id %}">Registrar devolución</a>
+                        <a href="{% url 'registrar_devolucion' prestamo.id %}" class="btn btn-warning">Registrar devolución</a>
                     {% else %}
                         Devuelto
                     {% endif %}

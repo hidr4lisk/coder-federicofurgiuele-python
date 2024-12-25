@@ -15,14 +15,15 @@
     <tbody>
       {% for libro in libros %}
         <tr>
-          <td>{{ libro.titulo }}
-            {% if libro.disponible %}
-          <a href="{% url 'modificar_libro' libro.id %}" class="btn btn-warning btn-sm">Modificar</a>
-          {% endif %}
-          </td>
+          <td>{{ libro.titulo }}</td>
           <td>{{ libro.autor }}</td>
           <td>{{ libro.isbn }}</td>
-          <td>{{ libro.disponible|yesno:"Sí,No" }}</td>
+          <td>
+            {{ libro.disponible|yesno:"Sí,No" }}
+            {% if libro.disponible %}
+              <a href="{% url 'modificar_libro' libro.id %}" class="btn btn-warning btn-sm">Modificar</a>
+            {% endif %}
+          </td>
       </tr>
       {% empty %}
         <tr>
