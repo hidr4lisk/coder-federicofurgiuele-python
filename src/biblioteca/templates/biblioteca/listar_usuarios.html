@@ -1,5 +1,4 @@
 {% extends "biblioteca/base.html" %}
-
 {% block contenido %}
 <fieldset>
     <legend><h2>Listado de Usuarios</h2></legend>
@@ -14,18 +13,22 @@
         </thead>
         <tbody>
             {% for usuario in usuarios %}
-                <tr>
-                    <td>{{ usuario.nombre }}</td>
-                    <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.telefono }}</td>
-                    <td>
+            <tr>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.telefono }}</td>
+                <td>
+                    {% if not usuario.tiene_prestamos_pendientes %}
                         <a href="{% url 'modificar_usuario' usuario.id %}" class="btn btn-warning">Modificar</a>
                         <form action="{% url 'eliminar_usuario' usuario.id %}" method="POST" style="display:inline;">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
-                    </td>
-                </tr>
+                    {% else %}
+                        <span class="text-muted">Usuario con préstamos pendientes<a href="{% url 'listar_prestamos' %}"><br>Listado de Prestamos</a></span>
+                    {% endif %}
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>

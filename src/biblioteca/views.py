@@ -26,7 +26,7 @@ def crear_usuario(request):
 
 @login_required
 def listar_usuarios(request):
-    usuarios = Usuario.objects.all()
+    usuarios = Usuario.objects.prefetch_related('prestamos').all()
     return render(request, "biblioteca/listar_usuarios.html", {"usuarios": usuarios})
 
 @login_required
