@@ -5,12 +5,13 @@
     <div class="intro-container">
 
     {% if user.is_authenticated %}
-        <p>Estás logueado. Disfruta de la experiencia personalizada.</p>
+        <h2>PANEL DE ADMINISTRACIÓN</h2>
         <img src="{% static 'img/Bibliotecario.jpg' %}" alt="Imagen de usuario" class="img-fluid">
     {% else %}
         <h1>Bienvenido a tu biblioteca digital</h1>
-        <p>Gestiona y presta libros fácilmente. Explora nuestra colección, haz préstamos y mantén un registro detallado de todas tus lecturas.</p>
         <p>¡Comienza ahora y disfruta de nuestra amplia selección de títulos!</p>
+        <p>Visita nuestra sección <a href="{% url 'listar_libros' %}">Listado de Libros</a> para ver el catálogo</p>
+
     {% endif %}
        
 

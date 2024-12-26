@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Mi Biblioteca{% endblock %}</title>
+    <title>{% block title %} 🐍Comisión 60095 | FURGIUELE{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
@@ -52,10 +52,10 @@
                 {% else %}
                     <!-- Separador -->
                     <li class="separator">|</li>
-                    <li><a href="{% url 'listar_libros' %}">Libros Disponibles</a></li>
+                    <li><a href="{% url 'listar_libros' %}">Listado de Libros</a></li>
                     <li class="separator">|</li>
                     <!-- Login para usuarios no autenticados -->
-                    <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                    <li><a href="{% url 'login' %}">Panel de Adminstración</a></li>
                 {% endif %}
             </ul>
         </div>
