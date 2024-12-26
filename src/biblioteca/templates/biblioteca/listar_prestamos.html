@@ -1,48 +1,65 @@
 {% extends 'biblioteca/base.html' %}
 
 {% block contenido %}
-<h2>Listado de Préstamos</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Libro</th>
-            <th>Usuario</th>
-            <th>Fecha Préstamo</th>
-            <th>Fecha Devolución</th>
-            <th>Acción</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for prestamo in prestamos %}
-        <tr>
-            <td>{{ prestamo.libro.titulo }}</td>
-            <td>{{ prestamo.usuario.nombre }}</td>
-            <td>
-                {% if prestamo.fecha_prestamo %}
-                    {{ prestamo.fecha_prestamo|date:"d F Y" }}
-                {% else %}
-                    Fecha no disponible
+<fieldset>
+    
+    <table style="margin-bottom: 50px;">
+            <div>
+                <legend><h2>Listado de Préstamos</h2></legend>
+            </div>
+            <div>
+                <!-- Botón de Eliminar Devueltos -->
+                {% if user.is_authenticated %}
+                    <form action="{% url 'eliminar_prestamos_devueltos' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar todos los préstamos devueltos?')">Eliminar Devueltos</button>
+                    </form>
                 {% endif %}
-            </td>
-            <td>
-                {% if prestamo.fecha_devolucion %}
-                    {{ prestamo.fecha_devolucion|date:"d F Y" }}
-                {% else %}
-                    No devuelto
-                {% endif %}
-            </td>
-            <td>
-                {% if not prestamo.fecha_devolucion %}
-                    En préstamo
-                    <a href="{% url 'registrar_devolucion' prestamo.id %}">Registrar devolución</a>
-                {% else %}
-                    Devuelto
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+                </div>
+    </table>
+    
+    
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Libro</th>
+                <th>Usuario</th>
+                <th>Fecha Préstamo</th>
+                <th>Fecha Devolución</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prestamo in prestamos %}
+            <tr>
+                <td>{{ prestamo.libro.titulo }}</td>
+                <td>{{ prestamo.usuario.nombre }}</td>
+                <td>
+                    {% if prestamo.fecha_prestamo %}
+                        {{ prestamo.fecha_prestamo|date:"d F Y" }}
+                    {% else %}
+                        Fecha no disponible
+                    {% endif %}
+                </td>
+                <td>
+                    {% if prestamo.fecha_devolucion %}
+                        {{ prestamo.fecha_devolucion|date:"d F Y" }}
+                    {% else %}
+                        No devuelto
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not prestamo.fecha_devolucion %}
+                        En préstamo
+                        <a href="{% url 'registrar_devolucion' prestamo.id %}" class="btn btn-warning">Registrar devolución</a>
+                    {% else %}
+                        Devuelto
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</fieldset>
 {% endblock %}

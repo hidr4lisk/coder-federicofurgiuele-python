@@ -1,7 +1,8 @@
 {% extends "biblioteca/base.html" %}
 
 {% block contenido %}
-  <h2>Listado de Libros</h2>
+<fieldset>
+  <legend><h2>Listado de Libros</h2></legend>
   <table>
     <thead>
       <tr>
@@ -9,7 +10,10 @@
         <th>Autor</th>
         <th>ISBN</th>
         <th>Disponible</th>
-      </tr>
+        {% if user.is_authenticated %}
+          <th>Acciones</th>
+        {% endif %}
+        </tr>
     </thead>
     <tbody>
       {% for libro in libros %}
@@ -17,13 +21,31 @@
           <td>{{ libro.titulo }}</td>
           <td>{{ libro.autor }}</td>
           <td>{{ libro.isbn }}</td>
-          <td>{{ libro.disponible|yesno:"Sí,No" }}</td>
+          <td>
+            {{ libro.disponible|yesno:"Sí,No" }}
+          </td>
+          {% if user.is_authenticated %}
+            <td>            
+              {% if libro.disponible %}
+                <a href="{% url 'modificar_libro' libro.id %}" class="btn btn-warning btn-sm">Modificar</a>
+                <form action="{% url 'eliminar_libro' libro.id %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este libro?')">Eliminar</button>
+                </form>
+                {% else %}
+                  {% if libro.prestamo_set.exists %}
+                    <p>Este libro está prestado a <strong>{{ libro.prestamo_set.first.usuario.nombre }}</strong></p>
+                  {% endif %}
+              {% endif %}            
+            </td>
+          {% endif %}
         </tr>
       {% empty %}
         <tr>
-          <td colspan="4">No hay libros disponibles.</td>
+          <td colspan="5">No hay libros disponibles.</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+</fieldset>
 {% endblock %}

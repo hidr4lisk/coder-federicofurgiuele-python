@@ -1,0 +1,11 @@
+{% extends "biblioteca/base.html" %}
+
+{% block contenido %}
+<h2>Modificar Usuario</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+</form>
+<a href="{% url 'listar_usuarios' %}" class="btn btn-secondary">Cancelar</a>
+{% endblock %}

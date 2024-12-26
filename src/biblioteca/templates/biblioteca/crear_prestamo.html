@@ -1,24 +1,24 @@
 {% extends "biblioteca/base.html" %}
 
 {% block contenido %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white text-center">
-                    <h2>Crear Préstamo</h2>
-                </div>
-                <div class="card-body">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            {{ form.as_p }}
-                        </div>
-                        <button type="submit" class="btn btn-success w-100">Crear Préstamo</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<form method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h2>Crear Préstamo</h2></legend>
+        <table>
+            {% for field in form %}
+            <tr>
+                <td><label for="{{ field.id_for_label }}">{{ field.label }}:</label></td>
+                <td>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small class="help-text">{{ field.help_text }}</small>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Crear Préstamo</button>
+    </fieldset>
+</form>
 {% endblock %}

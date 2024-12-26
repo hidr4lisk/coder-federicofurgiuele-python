@@ -1,24 +1,20 @@
 {% extends 'biblioteca/base.html' %}
+{% load static %}
 
 {% block contenido %}
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Acerca de Mí</h1>
-    <p>Hola, soy <strong>Federico Martín Furgiuele</strong>, desarrollador en formación con interés en <strong>Python</strong> y <strong>Django</strong>. 
-Estoy enfocado en el desarrollo web y la gestión de datos.</p>
+    <h1 class="text-center mb-4">Acerca de mí</h1>
+    <p>¡Hola! Soy <strong>Federico Martín Furgiuele</strong>, desarrollador en formación y entusiasta de la programación. Actualmente, estoy fortaleciendo mis habilidades en <strong>Python</strong> y <strong>Django</strong>, orientándome al desarrollo web y al manejo de datos.</p>
+    <img src="{% static 'img/Libro.jpg' %}" alt="Portada del libro" style="width: 100PX; height: auto;">
+    <h3 class="mt-4">Detalles del curso</h3>
+    <p><strong>Curso:</strong> Python y Django</p>
+    <p><strong>Comisión:</strong> Comisión 60095</p>
+    <p><strong>Profesor:</strong> Esteban Acevedo</p>
+    <p><strong>Tutor:</strong> Nicolás Dziuma</p>
 
-    <h3 class="mt-4">Detalles del Curso</h3>
-    <ul>
-        <li><strong>Curso:</strong> Python y Django</li>
-        <li><strong>Comisión:</strong> Comisión 60095</li>
-        <li><strong>Profesor:</strong> Esteban Acevedo</li>
-        <li><strong>Tutor:</strong> Nicolás Dziuma</li>
-    </ul>
-
-    <h3 class="mt-4">Conecta Conmigo</h3>
-    <p>Puedes ver más sobre mi trabajo y proyectos en los siguientes enlaces, donde comparto mi experiencia profesional, ideas y código:</p>
-    <ul>
-        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/federico-furgiuele/" target="_blank">Federico Furgiuele</a></li>
-        <li><strong>Repositorio del Proyecto:</strong> <a href="https://github.com/hidr4lisk/coder-federicofurgiuele-python.git" target="_blank">GitHub - coder-federicofurgiuele-python</a></li>
-    </ul>
+    <h3 class="mt-4">Conecta conmigo</h3>
+    <p>Puedes ver más sobre mi trabajo y proyectos en los siguientes enlaces:</p>
+    <ul><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/federico-furgiuele/" target="_blank">Federico Furgiuele</a></ul>
+    <ul><strong>Repositorio del Proyecto:</strong> <a href="https://github.com/hidr4lisk/coder-federicofurgiuele-python.git" target="_blank">GitHub - coder-federicofurgiuele-python</a></ul>
 </div>
 {% endblock %}
