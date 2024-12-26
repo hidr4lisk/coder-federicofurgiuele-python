@@ -24,6 +24,15 @@ El sistema cuenta con las siguientes funcionalidades:
 
 ## Configuración del Proyecto
 
+    ### CLONAR EL PROYECTO
+    ### UV SYNC
+    ### DESDE LA CARPETA SRC =>  pip install -r requirements.txt
+    ### DESDE LA CARPETA SRC => 
+                    - (en windows) python manage.py runserver
+                    - (en linux)  python3 manage.py runserver
+    ### Disfrute la experiencia :D
+
+
 El Superusuario esta configurado como **admin** contraseña **1234** 
 
 ### Requisitos
