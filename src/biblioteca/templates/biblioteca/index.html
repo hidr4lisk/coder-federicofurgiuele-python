@@ -1,19 +1,51 @@
-{% extends 'biblioteca/base.html' %}
-{% load static %}
+{% extends 'biblioteca/base.html' %} {% load static %} 
 
 {% block contenido %}
     <div class="intro-container">
-
     {% if user.is_authenticated %}
-        <h2>PANEL DE ADMINISTRACIÓN</h2>
-        <img src="{% static 'img/Bibliotecario.jpg' %}" alt="Imagen de usuario" class="img-fluid">
+    <h2>PANEL DE ADMINISTRACIÓN</h2>
+    <img src="{% static 'img/Bibliotecario.jpg' %} "alt="Imagen de usuario" class="img-fluid"/>
+    <table>
+        <tr>
+            <th>TÍTULO</th>
+            <th>DESCRIPCIÓN</th>
+        </tr>
+        <tr>
+            <td><a href="{% url 'crear_usuario' %}" class="btn btn-warning">Crear Usuario</a></td>
+            <td>Crear usuario con los campos: <br><strong>NOMBRE | MAIL | TELEFONO</strong></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'crear_libro' %}" class="btn btn-warning">Crear Libro</a></td>
+            <td>Crear libros con los campos: <br><strong>TITULO | AUTOR | ISBN</strong></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'crear_prestamo' %}" class="btn btn-warning">Crear Préstamo</a></td>
+            <td>Permite seleccionar un <strong>LIBRO</strong> entre los Disponibles y un <strong>USUARIO</strong>  para cargarle el Préstamo.</td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'listar_usuarios' %}" class="btn btn-warning">Listar Usuarios</a></td>
+            <td>Listado completo de usuarios. <br>Permite<strong> MODIFICACION y ELIMINACION, siempre que no adeude libros.</strong></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'listar_libros' %}" class="btn btn-warning">Listar Libros</a></td>
+            <td>Listado completo de libros. <br>Permite<strong> MODIFICACION y ELIMINACION, siempre que el libro no esté prestado.</strong></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'listar_prestamos' %}" class="btn btn-warning">Listar Préstamos</a></td>
+            <td>Listado completo de préstamos. <br>Permite<strong> Registrar la Devolución de Libros, Eliminación de préstamos completados.</strong></td>
+        </tr>
+    </table>
+
+
     {% else %}
-        <h1>Bienvenido a tu biblioteca digital</h1>
-        <p>¡Comienza ahora y disfruta de nuestra amplia selección de títulos!</p>
-        <p>Visita nuestra sección <a href="{% url 'listar_libros' %}">Listado de Libros</a> para ver el catálogo</p>
+    <h1>Bienvenido a tu biblioteca digital</h1>
+    <p>¡Comienza ahora y disfruta de nuestra amplia selección de títulos!</p>
+    <p>
+        Visita nuestra sección
+        <a href="{% url 'listar_libros' %}">Listado de Libros</a> para ver el
+        catálogo
+    </p>
 
     {% endif %}
-       
-
     </div>
 {% endblock contenido %}
