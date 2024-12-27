@@ -4,12 +4,8 @@
     <div class="intro-container">
     {% if user.is_authenticated %}
     <h2>PANEL DE ADMINISTRACIÓN</h2>
-    <img src="{% static 'img/Bibliotecario.jpg' %} "alt="Imagen de usuario" class="img-fluid"/>
+    <img src="{% static 'img/Bibliotecario.jpg' %}" alt="Imagen de usuario" class="img-fluid" style="width: 19%; height: auto;"/>
     <table>
-        <tr>
-            <th>TÍTULO</th>
-            <th>DESCRIPCIÓN</th>
-        </tr>
         <tr>
             <td><a href="{% url 'crear_usuario' %}" class="btn btn-warning">Crear Usuario</a></td>
             <td>Crear usuario con los campos: <br><strong>NOMBRE | MAIL | TELEFONO</strong></td>
@@ -36,6 +32,7 @@
         </tr>
     </table>
 
+    
 
     {% else %}
     <h1>Bienvenido a tu biblioteca digital</h1>

@@ -134,9 +134,11 @@ th {
 }
 .btn-warning {
   background-color: #ffc107;
+  color: black;
 }
 .btn-danger {
   background-color: #dc3545;
+  color: black;
 }
 .btn:hover {
   opacity: 0.8; /* Suaviza el hover para ambos */
