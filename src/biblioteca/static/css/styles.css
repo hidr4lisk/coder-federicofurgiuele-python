@@ -130,7 +130,7 @@ th {
   border-radius: 0.25rem;
   border: none;
   text-decoration: none;
-  color: white; /* Ajustar si es necesario */
+  color: black;
 }
 .btn-warning {
   background-color: #ffc107;

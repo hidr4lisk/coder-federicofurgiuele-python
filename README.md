@@ -1,6 +1,6 @@
 # Proyecto Python y Django - Biblioteca
 
-#### LINK YOUTUBE 🎬 https://youtu.be/hZnadQmMbuU
+#### LINK YOUTUBE 🎬 https://youtu.be/g-QGRurgW7s
 
 Este es un proyecto desarrollado como parte del curso de **Python y Django**, que tiene como objetivo gestionar una biblioteca, permitiendo la creación y gestión de usuarios, libros y préstamos.
 
